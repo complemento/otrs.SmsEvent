@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.1">
+    <Name>SmsEvent</Name>
+    <Version>3.1-2.0</Version>
+    <Vendor>Complemento Inc</Vendor>
+    <URL>http://www.complemento.net.br/</URL>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Description Lang="en">This package allows you to Send SMS messages based on OTRS triggers like Ticket Creation, Article Creation, SLA Update, Priority change, Escalation etc. It already commes with MobilePronto gateway, but we can write for you new gateways :) Request a quote.</Description>
+    <Description Lang="pt_BR">Este módule permite enviar mensagens de SMS baseado em gatilhos do OTRS tais como Criação de Chamado ou artigos, atualização de prioridade ou SLA, Escalação etc. O pacote já vem com o gateway MobilePronto, mas também podemos desenvolver novos gateways para você :) Solicite um orçamento.</Description>
+    <Framework>3.1.x</Framework>
+    <Framework>3.2.x</Framework>
+    <IntroInstall Lang="en" Title="Tutorial" Type="pre">        &lt;br/&gt;&lt;h1&gt;&lt;strong&gt;READ IT!!&lt;/strong&gt;&lt;/h1&gt;&lt;br/&gt;
+	Thanks for purchasing this package. You must agree with it's license available on our web site before continuing. 
+        &lt;br/&gt;
+        &lt;br/&gt;
+        &lt;strong&gt;Basicaly, you are not allowed to resell or distribute this package and you must have a license to use it.&lt;/strong&gt;&lt;br/&gt;
+        &lt;br/&gt;
+    </IntroInstall>
+    <IntroInstall Lang="pt_BR" Title="Tutorial" Type="pre">        &lt;br/&gt;&lt;h1&gt;&lt;strong&gt;LEIA ANTES DE PROSSEGUIR!!&lt;/strong&gt;&lt;/h1&gt;&lt;br/&gt;
+	Obrigado por adquirir este pacote. Você precisa concordar com os termos da licença de uso do mesmo antes de prosseguir.
+        &lt;br/&gt;
+        &lt;br/&gt;
+        &lt;strong&gt;Basicamente, não é permitido revender ou distribuir este pacote e você deve ter uma licença para poder utilizá-lo&lt;/strong&gt;&lt;br/&gt;
+        &lt;br/&gt;
+
+    </IntroInstall>
+    <BuildDate>2012-09-25 19:38:09</BuildDate>
+    <BuildHost>localhost</BuildHost>
+    <Filelist>
+        <File Location="Kernel/System/Sms/Gateways/MobilePronto.pm" Permission="644"></File>
+        <File Location="Kernel/System/Sms/Gateways/Zenvia.pm" Permission="644"></File>
+        <File Location="Kernel/System/Sms/Gateways/Clickatell.pm" Permission="644"></File>
+        <File Location="Kernel/Config/Files/SmsEvent.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/SmsEvent-MobilePronto.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/SmsEvent-Clickatell.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/SmsEvent-Zenvia.xml" Permission="644"></File>
+        <File Location="Kernel/System/Ticket/Event/SmsEvent.pm" Permission="644"></File>
+        <File Location="Kernel/System/SmsEvent.pm" Permission="644"></File>
+        <File Location="Kernel/Output/HTML/Standard/AdminSmsEvent.dtl" Permission="644"></File>
+        <File Location="Kernel/Modules/AdminSmsEvent.pm" Permission="644"></File>
+    </Filelist>
+    <DatabaseInstall>
+        <TableCreate Name="sms_event">
+            <Column Name="id" Required="true" PrimaryKey="true" Type="INTEGER" AutoIncrement="true"/>
+            <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
+            <Column Name="subject" Required="true" Size="200" Type="VARCHAR"/>
+            <Column Name="text" Required="true" Size="500" Type="VARCHAR"/>
+            <Column Name="content_type" Required="true" Size="250" Type="VARCHAR"/>
+            <Column Name="charset" Required="true" Size="100" Type="VARCHAR"/>
+            <Column Name="valid_id" Required="true" Type="SMALLINT"/>
+            <Column Name="comments" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="create_time" Required="true" Type="DATE"/>
+            <Column Name="create_by" Required="true" Type="INTEGER"/>
+            <Column Name="change_time" Required="true" Type="DATE"/>
+            <Column Name="change_by" Required="true" Type="INTEGER"/>
+            <Unique Name="sms_event_name">
+                 <UniqueColumn Name="name"/>
+            </Unique>
+            <ForeignKey ForeignTable="users">
+                <Reference Foreign="id" Local="create_by"/>
+                <Reference Foreign="id" Local="change_by"/>
+            </ForeignKey>
+        </TableCreate>
+        <TableCreate Name="sms_event_item">
+            <Column Name="sms_id" Required="true" Type="INTEGER"/>
+            <Column Name="event_key" Required="true" Size="200" Type="VARCHAR"/>
+            <Column Name="event_value" Required="true" Size="200" Type="VARCHAR"/>
+            <Index Name="sms_event_item_sms_id">
+                <IndexColumn Name="sms_id"/>
+            </Index>
+            <Index Name="sms_event_item_event_value">
+                <IndexColumn Name="event_value"/>
+            </Index>
+            <Index Name="sms_event_item_event_key">
+                <IndexColumn Name="event_key"/>
+            </Index>
+        </TableCreate>
+        <Insert Table="ticket_history_type">
+            <Data Key="name" Type="Quote">SendCustomerSms</Data>
+            <Data Key="comments" Type="Quote">Send Customer SMS</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+        <Insert Table="ticket_history_type">
+            <Data Key="name" Type="Quote">SendAgentSms</Data>
+            <Data Key="comments" Type="Quote">Send Agent SMS</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+    </DatabaseInstall>
+    <DatabaseUninstall>
+        <TableDrop Name="sms_event"/>
+        <TableDrop Name="sms_event_item"/>
+    </DatabaseUninstall>
+</otrs_package>
