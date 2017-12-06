@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_config version="1.0" init="Application">
-    <ConfigItem Name="SmsEvent::Gateway###MobilePronto-01" Required="0" Valid="1">
+<otrs_config version="2.0" init="Application">
+    <Setting Name="SmsEvent::Gateway###MobilePronto-01" Required="0" Valid="1">
         <Description Translatable="1">Mobile Pronto is a Gateway used to send SMS.</Description>
-        <Group>SmsEvent</Group>
-        <SubGroup>SmsEvent::Gateways</SubGroup>
-        <Setting>
+        <Navigation>SmsEvent::Gateways</Navigation>
+        <Value>
             <Hash>
                 <Item Key="CREDENCIAL"></Item>
                 <Item Key="PRINCIPAL_USER"></Item>
@@ -14,7 +13,7 @@
                 <Item Key="Name">Mobile Pronto</Item>
                 <Item Key="Module">Kernel::System::Sms::Gateways::MobilePronto</Item>
             </Hash>
-        </Setting>
-    </ConfigItem>
+        </Value>
+    </Setting>
 
 </otrs_config>

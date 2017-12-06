@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
     <Name>SmsEvent</Name>
-    <Version>3.1-2.0</Version>
+    <Version>6.0.0</Version>
     <Vendor>Complemento Inc</Vendor>
     <URL>http://www.complemento.net.br/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">This package allows you to Send SMS messages based on OTRS triggers like Ticket Creation, Article Creation, SLA Update, Priority change, Escalation etc. It already commes with MobilePronto gateway, but we can write for you new gateways :) Request a quote.</Description>
     <Description Lang="pt_BR">Este módule permite enviar mensagens de SMS baseado em gatilhos do OTRS tais como Criação de Chamado ou artigos, atualização de prioridade ou SLA, Escalação etc. O pacote já vem com o gateway MobilePronto, mas também podemos desenvolver novos gateways para você :) Solicite um orçamento.</Description>
-    <Framework>3.1.x</Framework>
-    <Framework>3.2.x</Framework>
+    <Framework>6.0.x</Framework>
+    <Framework>6.0.x</Framework>
     <IntroInstall Lang="en" Title="Tutorial" Type="pre">        &lt;br/&gt;&lt;h1&gt;&lt;strong&gt;READ IT!!&lt;/strong&gt;&lt;/h1&gt;&lt;br/&gt;
 	Thanks for purchasing this package. You must agree with it's license available on our web site before continuing. 
         &lt;br/&gt;
@@ -30,10 +30,10 @@
         <File Location="Kernel/System/Sms/Gateways/MobilePronto.pm" Permission="644"></File>
         <File Location="Kernel/System/Sms/Gateways/Zenvia.pm" Permission="644"></File>
         <File Location="Kernel/System/Sms/Gateways/Clickatell.pm" Permission="644"></File>
-        <File Location="Kernel/Config/Files/SmsEvent.xml" Permission="644"></File>
-        <File Location="Kernel/Config/Files/SmsEvent-MobilePronto.xml" Permission="644"></File>
-        <File Location="Kernel/Config/Files/SmsEvent-Clickatell.xml" Permission="644"></File>
-        <File Location="Kernel/Config/Files/SmsEvent-Zenvia.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/XML/SmsEvent.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/XML/SmsEvent-MobilePronto.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/XML/SmsEvent-Clickatell.xml" Permission="644"></File>
+        <File Location="Kernel/Config/Files/XML/SmsEvent-Zenvia.xml" Permission="644"></File>
         <File Location="Kernel/System/Ticket/Event/SmsEvent.pm" Permission="644"></File>
         <File Location="Kernel/System/SmsEvent.pm" Permission="644"></File>
         <File Location="Kernel/Output/HTML/Standard/AdminSmsEvent.dtl" Permission="644"></File>
